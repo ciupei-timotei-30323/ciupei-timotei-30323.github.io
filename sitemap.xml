@@ -2,41 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/posts/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/csharp/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/tags/csharp/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/projects/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/tags/projects/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/2024-09-03-sudoku-generator/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/posts/2024-09-03-sudoku-generator/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/tags/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/2024-08-16-home-git-server/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/posts/2024-08-16-home-git-server/</loc>
     <lastmod>2024-08-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/2024-05-19-a-new-project/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/posts/2024-05-19-a-new-project/</loc>
     <lastmod>2024-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/web/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/tags/web/</loc>
     <lastmod>2024-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/2024-05-06-e-puck-wall-following-program/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/posts/2024-05-06-e-puck-wall-following-program/</loc>
     <lastmod>2024-05-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/simulation/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/tags/simulation/</loc>
     <lastmod>2024-05-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/about/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/about/</loc>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://ciupei-timotei-30323.github.io/categories/</loc>
   </url>
 </urlset>
