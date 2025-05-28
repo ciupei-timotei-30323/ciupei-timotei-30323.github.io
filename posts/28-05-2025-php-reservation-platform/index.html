@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
+<meta property="og:title" content="PHP Reservation Platform" />
+<meta property="og:description" content="A simple reservation platform, where users create accounts then select a date and reserve. Made with LAMP stack" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-05-28T20:13:58+03:00" />
+<meta property="article:modified_time" content="2025-05-28T20:13:58+03:00" />
+
+
+<title>Timo&#39;s blog | PHP Reservation Platform</title>
+
+      <link rel="stylesheet" href="/css/main.min.698bc3e32b756e1f5322e47c0a024ef4fef02de7ddbc5af443455430b5482f03.css" integrity="sha256-aYvD4yt1bh9TIuR8CgJO9P7wLefdvFr0Q0VUMLVILwM=" crossorigin="anonymous">
+  
+        <link rel="stylesheet" href="/css/palette/dracula.min.3cdf1257046afa656bd324735b1c4dee1ea6983c6f9294f591601831c14d6275.css" integrity="sha256-PN8SVwRq&#43;mVr0yRzWxxN7h6mmDxvkpT1kWAYMcFNYnU=" crossorigin="anonymous">
+
+      <script src="/js/main.86bb3d8e6f46df0fc97c2731e6b99175a13b87a4086acf578ff9b6992fcf32c1.js" integrity="sha256-hrs9jm9G3w/JfCcx5rmRdaE7h6QIas9Xj/m2mS/PMsE=" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+  
+<body
+    class="dark"
+>
+  
+  <main>
+    
+  <div class="container pt-5">
+    <div class="row mt-5 pt-5">
+      
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb fw-bold">
+    <li class="breadcrumb-item">
+      <a href="/"
+        
+      >home</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about"
+        
+      >about</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/posts"
+        class="text-decoration-underline link-offset-3"
+        
+      >posts</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://github.com/ciupei-timotei-30323/"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >github</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://www.instagram.com/timo.ciupei/"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >instagram</a>
+      
+    </li>
+    </ol>
+  </nav>
+
+    </div>
+    
+    <div class="post">
+      <header class="mb-4">
+        <h1 class="text-uppercase">PHP Reservation Platform</h1>
+        
+        
+        <div aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item small">
+              <time datetime="2025-05-28T20:13:58&#43;03:00">May 28, 2025</time>
+            </li>
+            <li class="breadcrumb-item small">
+              3 minutes
+            </li>
+          </ol>
+        </div>
+      </header>
+      <article>
+        <h1 id="the-scope-of-the-application">The scope of the application</h1>
+<p>I want to make a simple reservation platform, where users create accounts then simply select a date and reserve. For this project I will use the LAMP tech stack.</p>
+<ul>
+<li><strong>L</strong> -&gt; Linux.</li>
+<li><strong>A</strong> -&gt; Apache for the server hosting.</li>
+<li><strong>M</strong> -&gt; MySQL for the database of the application.</li>
+<li><strong>P</strong> -&gt; PHP for the server side code.</li>
+</ul>
+<h2 id="use-case-diagram">Use case diagram</h2>
+<ul>
+<li>A simple use case diagram of the web app can be seen below</li>
+</ul>
+<p><img src="/images/useCaseDiag.png" alt="Use Case Diagram"></p>
+<h1 id="sign-up-process">Sign up process</h1>
+<p>A user should be able to sign-up using a username and a password. No email use because I want the process to be quick and painless.</p>
+<p>The PHP code that makes this possible is the following:</p>
+<p>The sequence diagram of the sign up process
+<img src="/images/SignUpSeqDiagram.jpg" alt="Image"></p>
+<ul>
+<li>
+<p><strong>isUserValid() : bool</strong> function</p>
+<p>First, the database is called.</p>
+<pre tabindex="0"><code>require &quot;dbConnect.php&quot;;
+$db = getDB();
+</code></pre><pre tabindex="0"><code>
+query is then done to find the `$_POST[&quot;name&quot;]` in the database
+ not found, returns true and puts the username value `$_SESSION['name'] = $username;`
+else returns false.
+
+</code></pre></li>
+<li>
+<p><strong>isPasswdValid(): bool</strong></p>
+<p>Checks if the &ldquo;enter password&rdquo; and &ldquo;re-enter password&rdquo; got the same input</p>
+</li>
+<li>
+<p><strong>insertUser(name, passwd): bool</strong></p>
+<p>Gets a connection to the database,
+then executes the following query:
+<code>$query = &quot;INSERT INTO users (name, passwd) VALUES ('$name', '$passwd')&quot;;</code></p>
+</li>
+</ul>
+<h1 id="how-does-a-user-reserve-a-day-and-hour">How does a user reserve a day and hour?</h1>
+<p>At entering the <code>main.php</code>, a table is generated with the avalaible hours this week.</p>
+<p>Classes diagrams for the main.php file</p>
+<p><img src="/images/ClassDiagWebApp.jpg" alt="Class Diagram"></p>
+<ul>
+<li>In the main.php, a <code>CliUserInterface</code> object is created that can generate a day&rsquo;s worth page. When navigating to different dates, the <code>scheduleSetup</code> property of the class is modified and another object is created.</li>
+<li>Classes that have &lsquo;Html&rsquo; in their name are just simple html catalogues. They contain the html code for the &lsquo;Generators&rsquo; classes to use. &lsquo;Html&rsquo; classes don&rsquo;t implement any logic.</li>
+<li>The &lsquo;Generators&rsquo; classes implement the actual logic of selecting the needed html code for the situation.</li>
+</ul>
+<h2 id="users-reservations-page">User&rsquo;s reservations page</h2>
+<p>The following is the sequence diagram of the process of generating the user&rsquo;s reservations on myReservations.php web page.</p>
+<p><img src="/images/userReservationSeqDiagram.png" alt="Seq Diagram"></p>
+<ul>
+<li>
+<p>The diagram doesn&rsquo;t include the process of canceling an appointment, as it is fairly simple:</p>
+</li>
+<li>
+<p>The future reservations are generated as a form which upon submition thorugh the <code>Cancel reservation</code> button will delete the reservation from the database.</p>
+</li>
+<li>
+<p>Also, the class diagram of the Reservation looks like this:</p>
+</li>
+</ul>
+<p><img src="/images/ReservationsClassDiagram.png" alt="Reservation Class Diagram"></p>
+<h2 id="database">Database</h2>
+<ul>
+<li>The database is quite simple, with three tables as in the figure below:</li>
+</ul>
+<p><img src="/images/dbDiagram.png" alt="Database diagram"></p>
+<ul>
+<li>Note that the <code>email</code> field from the <code>users</code> table is currently not used.</li>
+<li>Also, to add more <code>option</code> in the <code>options</code> table, one can simply add another field to the table and then add a html code for it in the respective php file.</li>
+<li>For the <code>options</code> table, if the corresponding <code>reserved_dates</code> row is deleted, the  corresponding <code>options</code> row is deleted too.</li>
+</ul>
+<h2 id="the-code">The code</h2>
+<ul>
+<li>
+<p>The code can be found on <a href="https://github.com/ciupei-timotei-30323/php">my github</a></p>
+</li>
+<li>
+<p>A live version of the web-app can be found <a href="https://timo.infinityfreeapp.com">here</a></p>
+</li>
+</ul>
+
+      </article>
+      
+  <div class="tags pb-4 pt-2">
+    
+    
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/php/">PHP</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
+  </div>
+
+      <div class="row">
+    <div class="col-md">
+        
+        <a href="https://ciupei-timotei-30323.github.io/posts/2024-09-03-sudoku-generator/">
+            <span>previous: </span>
+            <span>Sudoku generator</span>
+        </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+    </div>
+  </div>
+  <footer>
+    <div class="container mt-4 pb-1">
+    <p class="small opacity-75">
+        
+        
+    </p>
+</div>
+
+  </footer>
+
+  </main>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

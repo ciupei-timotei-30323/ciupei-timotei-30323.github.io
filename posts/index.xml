@@ -6,7 +6,16 @@
     <description>Recent content on Timo&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 May 2025 20:13:58 +0300</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PHP Reservation Platform</title>
+      <link>https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/</link>
+      <pubDate>Wed, 28 May 2025 20:13:58 +0300</pubDate>
+      
+      <guid>https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/</guid>
+      <description>A simple reservation platform, where users create accounts then select a date and reserve. Made with LAMP stack</description>
+    </item>
+    
     <item>
       <title>Sudoku generator</title>
       <link>https://ciupei-timotei-30323.github.io/posts/2024-09-03-sudoku-generator/</link>
