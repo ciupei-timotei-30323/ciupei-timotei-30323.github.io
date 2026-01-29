@@ -6,15 +6,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
-<meta property="og:title" content="A new project" />
-<meta property="og:description" content="Making a C# calculator on the web using Blazor and deploying using Azure" />
+<meta property="og:title" content="How I Made This Blog" />
+<meta property="og:description" content="A simple guide on how I made this blog using Hugo" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/2024-05-19-a-new-project/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-05-19T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-05-19T00:00:00+00:00" />
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/29-01-2026-how-i-made-this-blog/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-01-29T13:46:12+02:00" />
+<meta property="article:modified_time" content="2026-01-29T13:46:12+02:00" />
 
 
-<title>Timo&#39;s blog | A new project</title>
+<title>Timo&#39;s blog | How I Made This Blog</title>
 
       <link rel="stylesheet" href="/css/main.min.698bc3e32b756e1f5322e47c0a024ef4fef02de7ddbc5af443455430b5482f03.css" integrity="sha256-aYvD4yt1bh9TIuR8CgJO9P7wLefdvFr0Q0VUMLVILwM=" crossorigin="anonymous">
   
@@ -80,13 +80,13 @@
     
     <div class="post">
       <header class="mb-4">
-        <h1 class="text-uppercase">A new project</h1>
+        <h1 class="text-uppercase">How I Made This Blog</h1>
         
         
         <div aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item small">
-              <time datetime="2024-05-19T00:00:00&#43;00:00">May 19, 2024</time>
+              <time datetime="2026-01-29T13:46:12&#43;02:00">January 29, 2026</time>
             </li>
             <li class="breadcrumb-item small">
               2 minutes
@@ -95,18 +95,41 @@
         </div>
       </header>
       <article>
-        <h2 id="why">Why?</h2>
-<p>For a while now I&rsquo;ve been wanting to do a <strong>small project using C#</strong> so that I can learn more about the language and a bit of a <strong>framework</strong> aswell.</p>
-<hr>
-<h2 id="what">What?</h2>
-<p>The project should be something a little out of my current reach, so that I can expand my knowledges, but still be realistic, so I don&rsquo;t get discouraged halfway through the project. So I chose a <strong>calculator app</strong>.</p>
-<p>Still, that is not really out of my reach, basics C# skills could help you make a console based calculator app. This is where the web part comes in. I want the calculator to be put on a website and for this I need more than a few basics C# skills, I need to learn a bit about the <strong>ASP .NET Core</strong>, about <strong>Blazor</strong>, how to make Razor Pages and more.</p>
-<p>Additionally, from what I researched on the Internet, it&rsquo;s much easier to deploy such an web app on the cloud than on your own servers (or in my case Github Pages) so the calculator app will be deployed using <strong>Microsoft Azure</strong> thanks to their free student tier.
-The link will be available on this blog so stay tuned.</p>
-<hr>
-<h2 id="when">When?</h2>
-<p>As I write this, I remember I should learn for my finals which are close by, and also my level at some of this courses is really subpar to say at least. Whith that in mind, I&rsquo;ll try to firstly learn about how I can build this ideea of mine up until the finals period, and after those darn exams are hopefully aced, I&rsquo;ll really get down to it.</p>
-<p>Until then, I&rsquo;ll do small updates on whatever I do regarding this project.</p>
+        <h1 id="tech-stack">Tech stack</h1>
+<p>Because this is a <em>static</em> website, there is no need to use something too complex.
+Also, I wanted something that is easy to update, while also being fast and lightweight.</p>
+<p><strong>Hugo</strong> checks all these. It is a lightweitght static website builder, perfect for tasks like personal blogs.</p>
+<ul>
+<li>More details on Hugo, <a href="https://gohugo.io/about/">here</a></li>
+</ul>
+<p>The next challenge is hosting the website, and as I don&rsquo;t really have the money for an hosting service, I choose the Github free hosting service.
+The website  may not be that SEO optimized, but that is of little interest as this is mainly used to showcase projects of mine.</p>
+<p>The hosting works by putting out the website code in a new repository named as your Github username.
+Then you can access your website at <code>https://your-username.github.io</code></p>
+<h1 id="the-setup">The setup</h1>
+<p>After setting up the <a href="https://gohugo.io/getting-started/quick-start/#create-a-site">Hugo site</a>, it&rsquo;s time to add content.</p>
+<p>First start the Hugo server so that you can see in real time your changes:</p>
+<ul>
+<li><code>hugo server -D</code>, <em>-D</em> for showing the drafts posts too.</li>
+</ul>
+<p>Then, add a blog post.
+This can be easily done using the command:</p>
+<ul>
+<li><code>hugo new posts-directory/name-of-file.md</code></li>
+</ul>
+<p>When you are content (pun intended) with your new file, you can let Hugo build the site:</p>
+<ul>
+<li><code>hugo</code></li>
+</ul>
+<p>This command will put all your website files into the <code>/public</code> folder.</p>
+<h2 id="integrating-with-github">Integrating with Github</h2>
+<p>The flow is the same as tracking a usual repository with Github, but be aware of 2 things:</p>
+<ul>
+<li>Only track the <code>/public</code> folder. <em><strong>Don&rsquo;t</strong></em> track all your Hugo files like posts, themes, etc.</li>
+<li>The name of the repository should be the same as your Github username.</li>
+</ul>
+<p>And that&rsquo;s it.
+Commit the files and you have a blog.</p>
 <hr>
 <p><em>T.</em></p>
 
@@ -115,26 +138,20 @@ The link will be available on this blog so stay tuned.</p>
   <div class="tags pb-4 pt-2">
     
     
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/csharp/">CSharp</a>
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
         <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
   </div>
 
       <div class="row">
     <div class="col-md">
         
-        <a href="https://ciupei-timotei-30323.github.io/posts/2024-05-06-e-puck-wall-following-program/">
+        <a href="https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/">
             <span>previous: </span>
-            <span>E-Puck Wall Following Project</span>
+            <span>PHP Reservation Platform</span>
         </a>
         
     </div>
     <div class="col-md text-md-end">
-        
-        <a href="https://ciupei-timotei-30323.github.io/posts/2024-08-16-home-git-server/">
-            <span>next: </span>
-            <span>Git Home Server</span>
-        </a>
         
     </div>
 </div>
