@@ -8,16 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Feb 2026 11:51:05 +0200</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Modelling Thermal Comfort</title>
+      <title>Modeling Thermal Comfort</title>
       <link>https://ciupei-timotei-30323.github.io/posts/modelling-thermal-comfort/</link>
       <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
       
       <guid>https://ciupei-timotei-30323.github.io/posts/modelling-thermal-comfort/</guid>
-      <description>Overview   This project tried to model the thermal comfort in indoors enviroments.
-  The prediction is made in terms of 3 categories:
- warmer, colder, no change ,    representing the action an HVAC system might make.
-  The data required for modeling was sourced from the ASHRAE Thermal Comfort Database II 1.
-  The dataset contained subjective data as well as instrumental data and some thermal indices.</description>
+      <description>Creating a HVAC model using RFE</description>
     </item>
     
     <item>
