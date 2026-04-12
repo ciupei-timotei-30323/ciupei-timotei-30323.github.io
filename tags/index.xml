@@ -6,20 +6,20 @@
     <description>Recent content in Tags on Timo&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Feb 2026 11:51:05 +0200</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Apr 2026 15:19:05 +0200</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>modeling</title>
-      <link>https://ciupei-timotei-30323.github.io/tags/modeling/</link>
-      <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
+      <title>arduino</title>
+      <link>https://ciupei-timotei-30323.github.io/tags/arduino/</link>
+      <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
       
-      <guid>https://ciupei-timotei-30323.github.io/tags/modeling/</guid>
+      <guid>https://ciupei-timotei-30323.github.io/tags/arduino/</guid>
       <description></description>
     </item>
     
     <item>
       <title>projects</title>
       <link>https://ciupei-timotei-30323.github.io/tags/projects/</link>
-      <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
+      <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
       
       <guid>https://ciupei-timotei-30323.github.io/tags/projects/</guid>
       <description></description>
@@ -28,18 +28,36 @@
     <item>
       <title>python</title>
       <link>https://ciupei-timotei-30323.github.io/tags/python/</link>
-      <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
+      <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
       
       <guid>https://ciupei-timotei-30323.github.io/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>raspberry-pi</title>
+      <link>https://ciupei-timotei-30323.github.io/tags/raspberry-pi/</link>
+      <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
+      
+      <guid>https://ciupei-timotei-30323.github.io/tags/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>web</title>
       <link>https://ciupei-timotei-30323.github.io/tags/web/</link>
-      <pubDate>Thu, 29 Jan 2026 13:46:12 +0200</pubDate>
+      <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
       
       <guid>https://ciupei-timotei-30323.github.io/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>modeling</title>
+      <link>https://ciupei-timotei-30323.github.io/tags/modeling/</link>
+      <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
+      
+      <guid>https://ciupei-timotei-30323.github.io/tags/modeling/</guid>
       <description></description>
     </item>
     
