@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
 <meta property="og:title" content="Live Temperature Monitor" />
-<meta property="og:description" content="Creating a live temperature monitor using a Arduino and a Raspberry Pi" />
+<meta property="og:description" content="Creating a live temperature monitor using an Arduino and a Raspberry Pi" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/temperature-loging-and-showing-web-app/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2026-04-11T15:19:05+02:00" />
@@ -73,6 +73,14 @@
       >linkedin</a>
       
     </li>
+    <li class="breadcrumb-item">
+      <a href="https://www.dropbox.com/scl/fi/v8ojc8nq0mbjcv7flugks/Timotei_Ciupei_cv-2.pdf?rlkey=nv4nvaac2jd2ki0s13qrzbw4p&dl=0"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >resume</a>
+      
+    </li>
     </ol>
   </nav>
 
@@ -97,28 +105,28 @@
       <article>
         <h2 id="scope-of-the-project">Scope of the project</h2>
 <ul>
-<li>Have the temperature logged and monitored via an web app.</li>
+<li>Have the temperature logged and monitored via a web app.</li>
 <li>The temperature records will then be used to show some graphs on the web interface.</li>
-<li>The records coould also be used to train a AI to detect when is the most comfortable in the room, or in what climate I am, etc.</li>
+<li>The records could also be used to train an AI to detect when the room is most comfortable, what climate I am in, etc.</li>
 <li>A small LCD screen to show the temperature live in the physical world too.</li>
 </ul>
 <h2 id="hardware">Hardware</h2>
 <ul>
-<li>Responsible for collecting the sensor data is my Arduino Uno.</li>
-<li>The temperature sensor is a DS18B20 digital temperature sensor</li>
-<li>The &lsquo;Brain&rsquo; of the operation will be a 4GB Raspberry Pi 5</li>
+<li>My Arduino Uno is responsible for collecting the sensor data.</li>
+<li>The temperature sensor is a DS18B20 digital temperature sensor.</li>
+<li>The &lsquo;Brain&rsquo; of the operation will be a 4GB Raspberry Pi 5.</li>
 </ul>
 <h3 id="connecting-the-two-components">Connecting the two components</h3>
 <ul>
-<li>The Arduino and the Raspberry will be connected via a USB cable.</li>
-<li>The Arduino sends the temperature on a new line every few seconds on a new line on the serial port.</li>
-<li>The Pi the using a Python script reads the serial data using the <code>serial</code> library</li>
+<li>The Arduino and the Raspberry Pi will be connected via a USB cable.</li>
+<li>The Arduino sends the temperature on a new line via the serial port every few seconds.</li>
+<li>The Pi then uses a Python script to read the serial data using the <code>serial</code> library.</li>
 </ul>
 <h2 id="software">Software</h2>
 <h3 id="frontend">Frontend</h3>
 <ul>
 <li>
-<p>For the frontend, the tech stack is the following</p>
+<p>For the frontend, the tech stack is as follows:</p>
 <ul>
 <li>NodeJS</li>
 <li>VueJS as the main framework</li>
@@ -128,57 +136,50 @@
 </ul>
 </li>
 <li>
-<p>The server is hosted using <strong>nginx</strong>* on the Pi</p>
+<p>The server is hosted using <strong>nginx</strong> on the Pi.</p>
 </li>
 </ul>
-<h4 id="steps-in-developing">Steps in developing</h4>
+<h4 id="development-steps">Development steps</h4>
 <ol>
 <li>
-<p>Install NodeJS and npm</p>
+<p>Install NodeJS and npm:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt update
 sudo apt install nodejs npm
-
 </code></pre></div></li>
 <li>
-<p>Creating the project using Vite&rsquo;s VueJS template</p>
+<p>Create the project using Vite&rsquo;s VueJS template:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  npm create vite@latest tempWebsite -- --template vue
-
 </code></pre></div></li>
 <li>
-<p>Install all the libraries using npm</p>
+<p>Install all the libraries using npm:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> npm i chart.js vue-chartjs
-
 </code></pre></div></li>
 <li>
-<p>Develop locally</p>
+<p>Develop locally:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  npm run dev
-
 </code></pre></div></li>
 <li>
-<p>When ready, build the frontend</p>
+<p>When ready, build the frontend:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  npm run build
-
 </code></pre></div></li>
 <li>
-<p>Sync the website with the <code>/var/www/</code> in order for the <em>nginx</em> server to pick-up the changes</p>
+<p>Sync the website with <code>/var/www/</code> in order for the <em>nginx</em> server to pick up the changes:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo rsync -av --delete dist/ /var/www/html/tempWebsite
-
 </code></pre></div></li>
 </ol>
 <ul>
 <li>
-<p>The frontend will be split into <em>Components</em> which will be then &lsquo;glued&rsquo; together in the   App.vue.</p>
+<p>The frontend will be split into <em>Components</em>, which will then be &lsquo;glued&rsquo; together in <code>App.vue</code>.</p>
 </li>
 <li>
 <p>There will be two components on the frontend:</p>
 <ul>
 <li><code>SensorValue.vue</code>, responsible for fetching the sensor data and displaying it.</li>
-<li><code>SensorChart.vue</code>, responsible for fetching latest <em>n</em> datapoints and plotting them on the UI.</li>
+<li><code>SensorChart.vue</code>, responsible for fetching the latest <em>n</em> datapoints and plotting them on the UI.</li>
 </ul>
 </li>
 <li>
-<p>Also, in order for the data to be updated without the user refreshing the page,
-both components are using the <code>setInterval()</code> to autoupdate at a certain time interval.</p>
+<p>Also, in order for the data to be updated without the user refreshing the page, both components use <code>setInterval()</code> to auto-update at a certain time interval.</p>
 </li>
 </ul>
 <h3 id="backend">Backend</h3>
@@ -186,20 +187,20 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 <li>For the backend, the tech stack is as follows:
 <ul>
 <li>Python for Arduino interaction, as well as the API using <em>FastAPI</em>.</li>
-<li>PostgreSQL for storing the temperature and timestamps</li>
+<li>PostgreSQL for storing the temperature and timestamps.</li>
 <li>A bit of <strong>bash scripting</strong> for implementing a <em>cron job</em> on the server.</li>
-<li>Nginx for hosting the server</li>
-<li><a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Cloudfare Quick Tunnels</a>, for deploying the app on the world wide web :)</li>
+<li>Nginx for hosting the server.</li>
+<li><a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Cloudflare Quick Tunnels</a>, for deploying the app on the world wide web :)</li>
 </ul>
 </li>
 </ul>
 <h4 id="api-structure">API structure</h4>
 <ul>
 <li>
-<p><strong>GET</strong> <code>/api/temp</code> &ndash;&gt; fetches the latest sensor reading from the serial</p>
+<p><strong>GET</strong> <code>/api/temp</code> &ndash;&gt; fetches the latest sensor reading from the serial port.</p>
 <ul>
 <li>Response of the form:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON"> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> {
  <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#e6db74">&#34;22.31&#34;</span>,
  <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#e6db74">&#34;11:23&#34;</span>
  }
@@ -207,11 +208,11 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 </ul>
 </li>
 <li>
-<p><strong>GET</strong> <code>/api/temp/{limit}</code> &ndash;&gt; fetches the <em>limit</em> number of data entries in the database</p>
+<p><strong>GET</strong> <code>/api/temp/{limit}</code> &ndash;&gt; fetches a <em>limit</em> number of data entries from the database.</p>
 <ul>
 <li>Response of the form:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
 <span style="color:#f92672">&#34;data&#34;</span>: [
    [
        <span style="color:#ae81ff">22.31</span>,
@@ -233,10 +234,10 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 }
 </code></pre></div></li>
 <li>
-<p><strong>GET</strong> <code>/api/log/temp</code> &ndash;&gt; fetches the data from the sensor then logs it in the database</p>
+<p><strong>GET</strong> <code>/api/log/temp</code> &ndash;&gt; fetches the data from the sensor and then logs it in the database.</p>
 <ul>
 <li>Response of the form:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
      <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Data logged successfully&#34;</span>,
      <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#e6db74">&#34;22.25&#34;</span>,
      <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#e6db74">&#34;2026-04-12T11:31:04.185219&#34;</span>
@@ -246,63 +247,58 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 </li>
 </ul>
 <h4 id="structure-of-the-backend">Structure of the backend</h4>
-<p>-<img src="https://github.com/user-attachments/assets/95b0eed5-5815-40f4-bc3c-0440ce2eb636" alt="tempWebsite"></p>
+<p><img src="https://github.com/user-attachments/assets/95b0eed5-5815-40f4-bc3c-0440ce2eb636" alt="tempWebsite"></p>
 <ul>
 <li>
-<p>There is also a small script <code>cronJob.sh</code> that calls the <code>/log/temp</code> API endpoint as such:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> curl http://127.0.0.1:8080/api/log/temp
-</code></pre></div><pre tabindex="0"><code>
-</code></pre></li>
+<p>There is also a small script <code>cronJob.sh</code> that calls the <code>/log/temp</code> API endpoint like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> curl <span style="color:#f92672">[</span>http://127.0.0.1:8080/api/log/temp<span style="color:#f92672">](</span>http://127.0.0.1:8080/api/log/temp<span style="color:#f92672">)</span>
+</code></pre></div></li>
 <li>
-<p>This script runs every 5 minutes by changing the <em>crontab</em> file on the server</p>
+<p>This script runs every 5 minutes by changing the <em>crontab</em> file on the server.</p>
 </li>
 <li>
-<p>To do this run</p>
+<p>To do this, run:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> crontab -e
-</code></pre></div><pre tabindex="0"><code></code></pre></li>
+</code></pre></div></li>
 <li>
-<p>Then add the line</p>
+<p>Then add the following line:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">*/5 * * * * /bin/bash /home/timo/tempWebsite/backend/cronJob.sh
-</code></pre></div><pre tabindex="0"><code></code></pre></li>
+</code></pre></div></li>
 </ul>
 <h4 id="steps">Steps</h4>
 <ol>
 <li>
-<p>Create a virtual enviroment</p>
+<p>Create a virtual environment:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 -m venv .venv
 </code></pre></div></li>
 <li>
-<p>Activate the virtual enviroment</p>
+<p>Activate the virtual environment:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source .venv/bin/activate
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
-<p>Install the <em>fastAPI</em> and <em>psycopg</em> libraries</p>
+<p>Install the <em>FastAPI</em> and <em>psycopg</em> libraries:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install <span style="color:#e6db74">&#34;fastapi[standard]&#34;</span> <span style="color:#e6db74">&#34;psycopg[binary]&#34;</span>
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>After writing the files, test the API with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">fastapi dev api.py --port <span style="color:#ae81ff">8080</span>
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
-<p>If the API is done, run it in a separate <em>screen</em> so that it doesn&rsquo;t close when the ssh session is over</p>
+<p>Once the API is done, run it in a separate <em>screen</em> so that it doesn&rsquo;t close when the SSH session is over:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">screen -S fastapi
-</code></pre></div><p>``</p>
-<ul>
+</code></pre></div><ul>
 <li>Then run the command from the previous step.</li>
-<li>To exit the newly created window, press <code>Ctrl + A Ctrl + K</code></li>
+<li>To exit the newly created window, press <code>Ctrl + A</code>, then <code>D</code> (to detach). <em>(Note: <code>Ctrl + A</code> then <code>K</code> kills the window, you likely want to detach to keep it running)</em>.</li>
 </ul>
 </li>
 </ol>
 <h4 id="configuring-the-nginx-server">Configuring the <em><strong>nginx</strong></em> server</h4>
 <ul>
 <li>
-<p>The server acts as a <em>reverse proxy</em></p>
+<p>The server acts as a <em>reverse proxy</em>.</p>
 </li>
 <li>
-<p>The following is the config file</p>
+<p>The following is the config file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
   <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
   <span style="color:#f92672">server_name</span> <span style="color:#e6db74">YOUR_SERVER_NAME</span>;
@@ -316,30 +312,32 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 
   <span style="color:#f92672">location</span> <span style="color:#e6db74">/api/</span> {
       <span style="color:#75715e"># This points to your actual Python/Node API running locally
-</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://127.0.0.1:8080</span>;
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">[http://127.0.0.1:8080](http://127.0.0.1:8080)</span>;
 
       <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
       <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
       <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-For</span> $proxy_add_x_forwarded_for;
       <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-Proto</span> $scheme;
   }
-  }
+}
+</code></pre></div><ul>
+<li>
+<p>To check that the config file is valid, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  sudo nginx -t
 </code></pre></div></li>
 <li>
-<p>Then to check that the config file is valid run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  sudo nginx -t
-</code></pre></div><pre tabindex="0"><code>
-</code></pre></li>
-<li>
-<p>If all is good, restart the nginx server</p>
+<p>If everything is fine, restart the nginx server:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl reload nginx
 </code></pre></div></li>
 <li>
-<p>To start the Cloudfare website run (make sure it is <a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">installed</a>):</p>
+<p>To start the Cloudflare tunnel, run (make sure it is <a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/">installed</a>):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> cloudflared tunnel --url http://localhost:80
-</code></pre></div><pre tabindex="0"><code>The app will be live on the specified URL
-
-</code></pre></li>
+</code></pre></div><ul>
+<li>The app will now be live on the specified URL.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="final-result">Final result</h3>
 <ul>
@@ -347,18 +345,22 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 </ul>
 <p><img src="https://github.com/user-attachments/assets/6b063f7e-db5b-4932-81c9-799db230006d" alt="Final web page"></p>
 <ul>
-<li>The code can be found on my <a href="https://github.com/ciupei-timotei-30323/temperatureWebsite">Github</a></li>
+<li>Also, the physical system looks like this:</li>
+</ul>
+<p><img src="/images/Picture_of_final_system.jpg" alt="Picture of the final physical system"></p>
+<ul>
+<li>The code can be found on my <a href="https://github.com/ciupei-timotei-30323/temperatureWebsite">GitHub</a>.</li>
 </ul>
 <h3 id="future-improvements--additions">Future improvements / additions</h3>
 <ul>
-<li>A way for the user to scale up / down the graph so it shows a larger period of time</li>
-<li>Adding other sensors like humidity, CO2 , etc</li>
-<li>Training a ML model on the sensor data in order to predict future data records.</li>
+<li>A way for the user to scale the graph up/down so it shows a larger period of time.</li>
+<li>Adding other sensors like humidity, CO2, etc.</li>
+<li>Training an ML model on the sensor data in order to predict future data records.</li>
 </ul>
 <hr>
 <h3 id="references">References</h3>
 <ol>
-<li><a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Cloudfare Quick Tunnels</a></li>
+<li><a href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Cloudflare Quick Tunnels</a></li>
 <li><a href="https://fastapi.tiangolo.com/tutorial/first-steps/">FastAPI documentation</a></li>
 <li><a href="https://www.tigerdata.com/learn/building-python-apps-with-postgresql-and-psycopg3">Really helpful article about working with PostgreSQL DB using Python</a></li>
 <li><a href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/">Reverse proxy using Nginx</a></li>
@@ -366,7 +368,7 @@ both components are using the <code>setInterval()</code> to autoupdate at a cert
 </ol>
 <hr>
 <p><em>T.</em></p>
-
+<pre tabindex="0"><code></code></pre>
       </article>
       
   <div class="tags pb-4 pt-2">
