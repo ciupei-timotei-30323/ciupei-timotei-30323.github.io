@@ -6,7 +6,16 @@
     <description>Recent content in CSharp on Timo&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/tags/csharp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 May 2026 17:47:17 +0300</lastBuildDate><atom:link href="https://ciupei-timotei-30323.github.io/tags/csharp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASP NET Core API</title>
+      <link>https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/</link>
+      <pubDate>Sun, 17 May 2026 17:47:17 +0300</pubDate>
+      
+      <guid>https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/</guid>
+      <description>An ASP NET Core web API built to work with a PostgreSQL database</description>
+    </item>
+    
     <item>
       <title>Sudoku generator</title>
       <link>https://ciupei-timotei-30323.github.io/posts/2024-09-03-sudoku-generator/</link>

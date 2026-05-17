@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
+<meta property="og:title" content="ASP NET Core API" />
+<meta property="og:description" content="An ASP NET Core web API built to work with a PostgreSQL database" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-05-17T17:47:17+03:00" />
+<meta property="article:modified_time" content="2026-05-17T17:47:17+03:00" />
+
+
+<title>Timo&#39;s blog | ASP NET Core API</title>
+
+      <link rel="stylesheet" href="/css/main.min.698bc3e32b756e1f5322e47c0a024ef4fef02de7ddbc5af443455430b5482f03.css" integrity="sha256-aYvD4yt1bh9TIuR8CgJO9P7wLefdvFr0Q0VUMLVILwM=" crossorigin="anonymous">
+  
+        <link rel="stylesheet" href="/css/palette/dracula.min.3cdf1257046afa656bd324735b1c4dee1ea6983c6f9294f591601831c14d6275.css" integrity="sha256-PN8SVwRq&#43;mVr0yRzWxxN7h6mmDxvkpT1kWAYMcFNYnU=" crossorigin="anonymous">
+
+      <script src="/js/main.86bb3d8e6f46df0fc97c2731e6b99175a13b87a4086acf578ff9b6992fcf32c1.js" integrity="sha256-hrs9jm9G3w/JfCcx5rmRdaE7h6QIas9Xj/m2mS/PMsE=" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+  
+<body
+    class="dark"
+>
+  
+  <main>
+    
+  <div class="container pt-5">
+    <div class="row mt-5 pt-5">
+      
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb fw-bold">
+    <li class="breadcrumb-item">
+      <a href="/"
+        
+      >home</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about"
+        
+      >about</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/posts"
+        class="text-decoration-underline link-offset-3"
+        
+      >posts</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://github.com/ciupei-timotei-30323/"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >github</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://ro.linkedin.com/in/timotei-ciupei-16aa55342"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >linkedin</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://www.dropbox.com/scl/fi/v8ojc8nq0mbjcv7flugks/Timotei_Ciupei_cv-2.pdf?rlkey=nv4nvaac2jd2ki0s13qrzbw4p&dl=0"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >resume</a>
+      
+    </li>
+    </ol>
+  </nav>
+
+    </div>
+    
+    <div class="post">
+      <header class="mb-4">
+        <h1 class="text-uppercase">ASP NET Core API</h1>
+        
+        
+        <div aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item small">
+              <time datetime="2026-05-17T17:47:17&#43;03:00">May 17, 2026</time>
+            </li>
+            <li class="breadcrumb-item small">
+              8 minutes
+            </li>
+          </ol>
+        </div>
+      </header>
+      <article>
+        <h2 id="overview">Overview</h2>
+<p>The MediTap API is a RESTful backend service built with ASP.NET Core. It provides endpoints to manage medical records, including patients, medics, appointments, medications, symptoms, and affections.</p>
+<h2 id="base-url">Base URL</h2>
+<p>All API requests should be prefixed with the base URL of the host. For local development, this is typically:
+<code>http://localhost:5142</code> or <code>https://localhost:7116</code></p>
+<h2 id="authentication">Authentication</h2>
+<p>The API uses <strong>JSON Web Tokens (JWT)</strong> for authentication and authorization.
+Clients must include the token in the <code>Authorization</code> HTTP header using the Bearer schema:
+<code>Authorization: Bearer &lt;token&gt;</code></p>
+<h3 id="roles">Roles</h3>
+<p>The system utilizes role-based access control (RBAC). The primary roles are:</p>
+<ul>
+<li><strong>Medic</strong>: Healthcare providers. Note that Medic with <code>Id = 1</code> functions as the System Administrator (capable of creating other Medics and Patients).</li>
+<li><strong>Patient</strong>: Standard users accessing their own medical data.</li>
+</ul>
+<hr>
+<h2 id="endpoint-summary">Endpoint Summary</h2>
+<table>
+<thead>
+<tr>
+<th>HTTP Method</th>
+<th>Endpoint</th>
+<th>Authorization Role</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Authentication</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Auth/login</code></td>
+<td>Public</td>
+<td>Authenticates a user (Medic or Patient) and returns a JWT token.</td>
+</tr>
+<tr>
+<td><strong>Medic</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Medic/me</code></td>
+<td>Medic</td>
+<td>Retrieves the profile summary of the currently authenticated Medic.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Medic</code></td>
+<td>Admin (Medic ID=1)</td>
+<td>Creates a new Medic profile.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Medic/me/scan</code></td>
+<td>Medic</td>
+<td>Scans a patient&rsquo;s card to link the Patient to the Medic and returns a profile summary.</td>
+</tr>
+<tr>
+<td><strong>Patient</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/me</code></td>
+<td>Patient</td>
+<td>Retrieves the complete profile of the currently authenticated Patient.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Patient</code></td>
+<td>Admin (Medic ID=1)</td>
+<td>Creates a new Patient profile.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/{id}/profile</code></td>
+<td>Medic</td>
+<td>Retrieves the profile summary of a specific patient.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/{id}/appointment</code></td>
+<td>Medic</td>
+<td>Retrieves a list of appointments for a specific patient.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/{id}/symptom</code></td>
+<td>Medic</td>
+<td>Retrieves a list of symptoms recorded by a specific patient.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/{id}/affection</code></td>
+<td>Medic</td>
+<td>Retrieves a list of affections diagnosed for a specific patient.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Patient/{id}/medication</code></td>
+<td>Medic</td>
+<td>Retrieves a list of medications prescribed to a specific patient.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Patient/me/symptom</code></td>
+<td>Patient</td>
+<td>Adds a new symptom to the currently authenticated patient&rsquo;s profile.</td>
+</tr>
+<tr>
+<td><strong>Appointment</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Appointment/{id}</code></td>
+<td>Medic, Patient</td>
+<td>Retrieves a specific appointment by its ID.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Appointment</code></td>
+<td>Medic, Patient</td>
+<td>Creates a new appointment.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/Appointment/{id}</code></td>
+<td>Medic, Patient</td>
+<td>Deletes a specific appointment.</td>
+</tr>
+<tr>
+<td><strong>Affection</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Affection/{id}</code></td>
+<td>Medic</td>
+<td>Retrieves a specific affection record by its ID.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Affection</code></td>
+<td>Medic</td>
+<td>Creates a new affection record for a linked patient.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/Affection/{id}</code></td>
+<td>Medic</td>
+<td>Deletes a specific affection record.</td>
+</tr>
+<tr>
+<td><strong>Medication</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/Medication/{id}</code></td>
+<td>Medic</td>
+<td>Retrieves a specific medication record by its ID.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/Medication</code></td>
+<td>Medic</td>
+<td>Prescribes a new medication to a linked patient.</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/api/Medication/{id}</code></td>
+<td>Medic</td>
+<td>Updates an existing medication record.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/Medication/{id}</code></td>
+<td>Medic</td>
+<td>Deletes a specific medication record.</td>
+</tr>
+<tr>
+<td><strong>Symptom</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/api/Symptom/{id}</code></td>
+<td>Patient</td>
+<td>Updates an existing symptom record (e.g., toggles active status).</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/Symptom/{id}</code></td>
+<td>Patient</td>
+<td>Deletes a specific symptom record.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="standard-http-status-codes">Standard HTTP Status Codes</h2>
+<p>The API returns standard HTTP status codes to indicate the success or failure of a request:</p>
+<ul>
+<li><strong>200 OK</strong>: The request was successful, and the response body contains the requested data.</li>
+<li><strong>201 Created</strong>: The resource was successfully created. The response includes a <code>Location</code> header pointing to the new resource.</li>
+<li><strong>204 No Content</strong>: The request was successful, but there is no data to return (commonly used for successful DELETE and PUT requests).</li>
+<li><strong>400 Bad Request</strong>: The request was invalid or could not be understood by the server (e.g., validation errors, invalid CNP, duplicate email).</li>
+<li><strong>401 Unauthorized</strong>: The request requires user authentication, and the token is missing, invalid, or expired.</li>
+<li><strong>403 Forbidden</strong>: The authenticated user does not have the necessary permissions (roles) to access the resource.</li>
+<li><strong>404 Not Found</strong>: The requested resource could not be found, or the user does not have authorization to view that specific entity.</li>
+<li><strong>500 Internal Server Error</strong>: An unexpected condition was encountered by the server.</li>
+</ul>
+<hr>
+<h2 id="core-data-transfer-objects-dtos-reference">Core Data Transfer Objects (DTOs) Reference</h2>
+<h3 id="loginrequestdto"><code>LoginRequestDTO</code></h3>
+<p>Used for authentication.</p>
+<ul>
+<li><code>Email</code> (string): The user&rsquo;s email address.</li>
+<li><code>Password</code> (string): The user&rsquo;s password.</li>
+<li><code>Role</code> (string): &ldquo;Medic&rdquo; or &ldquo;Patient&rdquo;.</li>
+</ul>
+<h3 id="patientcreationdto"><code>PatientCreationDTO</code></h3>
+<p>Used when an Administrator creates a new patient.</p>
+<ul>
+<li><code>DateOfBirth</code> (DateOnly)</li>
+<li><code>CNP</code> (string): Romanian National Identification Number.</li>
+<li><code>FirstName</code> (string)</li>
+<li><code>LastName</code> (string)</li>
+<li><code>Password</code> (string)</li>
+<li><code>Email</code> (string, optional)</li>
+<li><code>PhoneNumber</code> (string, optional)</li>
+<li><code>Address</code> (string, optional)</li>
+</ul>
+<h3 id="appointmentcreationdto"><code>AppointmentCreationDTO</code></h3>
+<p>Used when scheduling an appointment.</p>
+<ul>
+<li><code>Date</code> (DateTime): The scheduled time of the appointment.</li>
+<li><code>IssueDate</code> (DateTime): When the appointment was requested.</li>
+<li><code>Title</code> (string, optional)</li>
+<li><code>Description</code> (string, optional)</li>
+<li><code>OtherUserId</code> (integer): If the requester is a Medic, this is the PatientId. If the requester is a Patient, this is the MedicId.</li>
+</ul>
+<h3 id="mediccreationdto"><code>MedicCreationDTO</code></h3>
+<p>Used when an Administrator creates a new Medic profile.</p>
+<ul>
+<li><code>FirstName</code> (string)</li>
+<li><code>LastName</code> (string)</li>
+<li><code>Specialty</code> (string)</li>
+<li><code>MedicStatus</code> (string): Must be one of <code>Active</code>, <code>Inactive</code>, <code>FormerMember</code>, <code>Unconfirmed</code>.</li>
+<li><code>Password</code> (string)</li>
+<li><code>Email</code> (string, optional)</li>
+<li><code>PhoneNumber</code> (string, optional)</li>
+</ul>
+<h3 id="medicationcreationdto"><code>MedicationCreationDTO</code></h3>
+<p>Used when a Medic prescribes medication to a Patient.</p>
+<ul>
+<li><code>PatientId</code> (integer): The ID of the patient receiving the prescription.</li>
+<li><code>Name</code> (string): The name of the medication.</li>
+<li><code>Brand</code> (string, optional)</li>
+<li><code>Quantity</code> (float)</li>
+<li><code>UnitOfMeasure</code> (string)</li>
+<li><code>PercentReimbursed</code> (integer)</li>
+<li><code>IssueDate</code> (DateOnly): Must not be a future date.</li>
+<li><code>StartDate</code> (DateOnly, optional): Must be present or future date.</li>
+<li><code>EndDate</code> (DateOnly, optional): Must be present or future date.</li>
+</ul>
+<h3 id="affectioncreationdto"><code>AffectionCreationDTO</code></h3>
+<p>Used to record a medical condition or diagnosis.</p>
+<ul>
+<li><code>PatientId</code> (integer)</li>
+<li><code>Name</code> (string): The name of the affection/condition.</li>
+<li><code>DiagnoseDate</code> (DateOnly): Must not be a future date.</li>
+<li><code>Description</code> (string, optional)</li>
+</ul>
+<h3 id="symptomcreationdto"><code>SymptomCreationDTO</code></h3>
+<p>Used by Patients to log a new symptom.</p>
+<ul>
+<li><code>Name</code> (string)</li>
+<li><code>AddedTime</code> (DateTime): The time the symptom is logged. Must not be a future date.</li>
+<li><code>StartOfSymptom</code> (DateOnly, optional): Must not be a future date.</li>
+<li><code>Description</code> (string, optional)</li>
+</ul>
+<h3 id="symptomupdatedto"><code>SymptomUpdateDTO</code></h3>
+<p>Used by Patients to update the status of an existing symptom.</p>
+<ul>
+<li><code>isPresent</code> (boolean): Set to <code>false</code> if the symptom has stopped.</li>
+<li><code>StartOfSymptom</code> (DateOnly, optional)</li>
+<li><code>Description</code> (string, optional)</li>
+</ul>
+<hr>
+<h2 id="payload--response-examples">Payload &amp; Response Examples</h2>
+<p>To ensure predictable integration, below are standardized examples of request payloads and expected responses for critical endpoints.</p>
+<h3 id="1-authenticate-user-post-apiauthlogin">1. Authenticate User (<code>POST /api/Auth/login</code>)</h3>
+<p><strong>Request Body:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;medic@example.com&#34;</span>,
+  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;securepassword123&#34;</span>,
+  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>
+}
+
+</code></pre></div><p><strong>Success Response (200 OK):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&#34;</span>,
+  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>,
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">2</span>
+}
+
+</code></pre></div><h3 id="2-create-patient-post-apipatient">2. Create Patient (<code>POST /api/Patient</code>)</h3>
+<p><strong>Headers:</strong> <code>Authorization: Bearer &lt;Admin_Token&gt;</code></p>
+<p><strong>Request Body:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
+  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
+  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;patientpassword&#34;</span>,
+  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
+  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
+}
+
+</code></pre></div><p><strong>Success Response (200 OK):</strong>
+<em>(Returns the created Patient entity, omitting the plain-text password)</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
+  <span style="color:#f92672">&#34;cnp&#34;</span>: {
+    <span style="color:#f92672">&#34;codNumericPersonal&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>
+  },
+  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+  <span style="color:#f92672">&#34;email&#34;</span>: {
+    <span style="color:#f92672">&#34;emailAddress&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
+  },
+  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
+  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: {
+    <span style="color:#f92672">&#34;number&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
+    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
+  },
+  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
+}
+
+</code></pre></div><h3 id="3-link-patient-via-scan-post-apimedicmescan">3. Link Patient via Scan (<code>POST /api/Medic/me/scan</code>)</h3>
+<p><strong>Headers:</strong> <code>Authorization: Bearer &lt;Medic_Token&gt;</code></p>
+<p><strong>Request Body:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
+  <span style="color:#f92672">&#34;passwordHashed&#34;</span>: <span style="color:#e6db74">&#34;$2a$11$e.ExampleHashedPasswordString...&#34;</span>
+}
+
+</code></pre></div><p><strong>Success Response (200 OK):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
+  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>
+}
+
+</code></pre></div><hr>
+<h2 id="domain-constraints--business-logic">Domain Constraints &amp; Business Logic</h2>
+<p>The API strictly enforces several domain rules at the service layer. Violating these rules will result in a <code>400 Bad Request</code> or <code>500 Internal Server Error</code> with a descriptive message.</p>
+<table>
+<thead>
+<tr>
+<th>Validation Domain</th>
+<th>Rule Enforced</th>
+<th>Exception Raised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CNP (Romanian ID)</strong></td>
+<td>Must be exactly 13 characters and pass the official checksum calculation algorithm. Must be unique in the system.</td>
+<td><code>InvalidCNPException</code>, <code>CNPAlreadyExistsException</code></td>
+</tr>
+<tr>
+<td><strong>Email Address</strong></td>
+<td>Must contain an <code>@</code> symbol and a valid domain format.</td>
+<td><code>InvalidEmailException</code></td>
+</tr>
+<tr>
+<td><strong>Phone Number</strong></td>
+<td>Verified against the Google <code>libphonenumber-csharp</code> library. Assumes Romanian (<code>RO</code>) regional formatting by default.</td>
+<td><code>InvalidPhoneNumberException</code></td>
+</tr>
+<tr>
+<td><strong>Dates (Birth/Past)</strong></td>
+<td>Date of Birth, Affection Diagnose Dates, and Symptom Start Dates cannot be set in the future.</td>
+<td><code>FutureDateException</code></td>
+</tr>
+<tr>
+<td><strong>Dates (Appointments)</strong></td>
+<td>Appointment dates must be in the future. Issue dates must be past or present.</td>
+<td>Standard <code>BadRequest</code></td>
+</tr>
+<tr>
+<td><strong>Scheduling Conflicts</strong></td>
+<td>Appointments cannot be scheduled if either the Medic or the Patient has another appointment within a +/- 15-minute window.</td>
+<td>Standard <code>BadRequest</code></td>
+</tr>
+<tr>
+<td><strong>Username Generation</strong></td>
+<td>System-generated upon creation. Format: <code>[Role_Prefix]-[FirstName]-[Identifier]-[UUID_Hash]</code>. Must be unique.</td>
+<td><code>UnameAlreadyExistsException</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="authorization-constraints">Authorization Constraints</h2>
+<p>The API utilizes strict cross-referencing to ensure data privacy:</p>
+<ul>
+<li><strong>Medic Access:</strong> A Medic cannot query, modify, or add records (Symptoms, Affections, Medications, Appointments) for a Patient unless the two entities are explicitly linked via the <code>MedicPatient</code> relationship table (established via the <code>/scan</code> endpoint).</li>
+<li><strong>Patient Access:</strong> A Patient can only view and modify their own records. They cannot access records of other patients.</li>
+<li><strong>Deletion:</strong> Resources can only be deleted by the user who owns them or the Medic who created them, provided the authorization link still exists.</li>
+</ul>
+<h3 id="data-architecture--entity-relationships">Data Architecture &amp; Entity Relationships</h3>
+<p>Understanding the underlying data model is crucial for integrating with the MediTap API effectively. The system uses Entity Framework Core with a PostgreSQL database, structured around the following core relationships:</p>
+<ul>
+<li><strong>Patient ↔ Medic (Many-to-Many):</strong> A patient can be treated by multiple medics, and a medic treats multiple patients. This relationship is established when a Medic scans a Patient&rsquo;s card (via the <code>MedicPatient</code> linking table). A valid link here is the primary authorization gateway for accessing a patient&rsquo;s medical records.</li>
+<li><strong>Patient ↔ Appointment (One-to-Many):</strong> A patient can have multiple appointments.</li>
+<li><strong>Medic ↔ Appointment (One-to-Many):</strong> A medic can oversee multiple appointments.</li>
+<li><strong>Patient ↔ Medication (One-to-Many):</strong> A patient can have multiple prescribed medications.</li>
+<li><strong>Medic ↔ Medication (One-to-Many):</strong> A medic can issue multiple prescriptions.</li>
+<li><strong>Patient ↔ Symptom (One-to-Many):</strong> A patient logs their own symptoms over time. (Note: Medics can view these symptoms and mark them as &ldquo;checked&rdquo;, establishing a nullable many-to-one relationship with the checking Medic).</li>
+<li><strong>Patient ↔ Affection (One-to-Many):</strong> A patient can be diagnosed with multiple affections (conditions).</li>
+<li><strong>Medic ↔ Affection (One-to-Many):</strong> A medic can diagnose multiple affections.</li>
+</ul>
+<hr>
+<h3 id="error-handling--custom-exceptions">Error Handling &amp; Custom Exceptions</h3>
+<p>The API utilizes domain-specific exceptions to enforce business rules. When these exceptions are caught by the controllers, they are mapped to standard HTTP responses (typically <code>400 Bad Request</code> or <code>500 Internal Server Error</code> depending on the severity).</p>
+<p>If a request fails validation, the response body will typically contain a plain-text string detailing the specific error, originating from one of the following system exceptions:</p>
+<ul>
+<li><code>InvalidCNPException</code>: &ldquo;CNP provided is not valid.&rdquo;</li>
+<li><code>InvalidEmailException</code>: &ldquo;The Email address provided is not valid.&rdquo;</li>
+<li><code>InvalidPhoneNumberException</code>: &ldquo;The phone number provided is not valid.&rdquo;</li>
+<li><code>UnameAlreadyExistsException</code>: &ldquo;Username already exists. Please try again.&rdquo;</li>
+<li><code>CNPAlreadyExistsException</code>: &ldquo;CNP already exists.&rdquo;</li>
+<li><code>FutureDateException</code>: &ldquo;Selected date is in the future.&rdquo;</li>
+<li><code>PatientNotFoundException</code>: Returns a <code>404 Not Found</code> when attempting to query a patient that does not exist or is not linked.</li>
+<li><code>NoAppointmentFoundException</code> / <code>NoMedicAssignedException</code>: Internal domain exceptions utilized by the service layer to halt unauthorized processing.</li>
+</ul>
+<hr>
+<h2 id="the-code">The Code</h2>
+<ul>
+<li>The code can be found on <a href="https://github.com/ciupei-timotei-30323/MediTap-Backend">my github</a></li>
+</ul>
+<hr>
+<p><em>T.</em></p>
+
+      </article>
+      
+  <div class="tags pb-4 pt-2">
+    
+    
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/csharp/">CSharp</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/postgresql/">postgresql</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/asp-net/">ASP NET</a>
+  </div>
+
+      <div class="row">
+    <div class="col-md">
+        
+        <a href="https://ciupei-timotei-30323.github.io/posts/temperature-loging-and-showing-web-app/">
+            <span>previous: </span>
+            <span>Live Temperature Monitor</span>
+        </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+    </div>
+  </div>
+  <footer>
+    <div class="container mt-4 pb-1">
+    <p class="small opacity-75">
+        
+        
+    </p>
+</div>
+
+  </footer>
+
+  </main>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
