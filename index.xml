@@ -10,30 +10,30 @@
     <atom:link href="https://ciupei-timotei-30323.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ClubCheck: Event Discovery That Fills Itself</title>
-      <link>https://ciupei-timotei-30323.github.io/posts/clubcheck-web-app/</link>
+      <link>https://ciupei-timotei-30323.github.io/posts/2026-11-19-clubcheck-web-app/</link>
       <pubDate>Thu, 19 Nov 2026 18:55:12 +0200</pubDate>
-      <guid>https://ciupei-timotei-30323.github.io/posts/clubcheck-web-app/</guid>
+      <guid>https://ciupei-timotei-30323.github.io/posts/2026-11-19-clubcheck-web-app/</guid>
       <description>A three-service event discovery platform where a scraper uses a tiered LLM pipeline to find, classify, and publish concerts and club nights automatically. ASP.NET Core, Node.js, Next.js, PostgreSQL, Azure Container Apps.</description>
     </item>
     <item>
       <title>ASP NET Core API</title>
-      <link>https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/</link>
+      <link>https://ciupei-timotei-30323.github.io/posts/2026-05-17-asp-net-core-api/</link>
       <pubDate>Sun, 17 May 2026 17:47:17 +0300</pubDate>
-      <guid>https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/</guid>
+      <guid>https://ciupei-timotei-30323.github.io/posts/2026-05-17-asp-net-core-api/</guid>
       <description>An ASP NET Core web API built to work with a PostgreSQL database</description>
     </item>
     <item>
       <title>Live Temperature Monitor</title>
-      <link>https://ciupei-timotei-30323.github.io/posts/temperature-loging-and-showing-web-app/</link>
+      <link>https://ciupei-timotei-30323.github.io/posts/2026-04-11-temperature-loging-and-showing-web-app/</link>
       <pubDate>Sat, 11 Apr 2026 15:19:05 +0200</pubDate>
-      <guid>https://ciupei-timotei-30323.github.io/posts/temperature-loging-and-showing-web-app/</guid>
+      <guid>https://ciupei-timotei-30323.github.io/posts/2026-04-11-temperature-loging-and-showing-web-app/</guid>
       <description>Creating a live temperature monitor using an Arduino and a Raspberry Pi</description>
     </item>
     <item>
       <title>Modeling Thermal Comfort</title>
-      <link>https://ciupei-timotei-30323.github.io/posts/modelling-thermal-comfort/</link>
+      <link>https://ciupei-timotei-30323.github.io/posts/2026-02-23-modelling-thermal-comfort/</link>
       <pubDate>Mon, 23 Feb 2026 11:51:05 +0200</pubDate>
-      <guid>https://ciupei-timotei-30323.github.io/posts/modelling-thermal-comfort/</guid>
+      <guid>https://ciupei-timotei-30323.github.io/posts/2026-02-23-modelling-thermal-comfort/</guid>
       <description>Creating a HVAC model using RFE</description>
     </item>
     <item>
