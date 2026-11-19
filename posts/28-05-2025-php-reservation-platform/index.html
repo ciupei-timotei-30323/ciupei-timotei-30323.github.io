@@ -6,13 +6,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
-<meta property="og:title" content="PHP Reservation Platform" />
-<meta property="og:description" content="A simple reservation platform, where users create accounts then select a date and reserve. Made with LAMP stack" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2025-05-28T20:13:58+03:00" />
-<meta property="article:modified_time" content="2025-05-28T20:13:58+03:00" />
-
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/28-05-2025-php-reservation-platform/">
+  <meta property="og:site_name" content="Timo&#39;s blog">
+  <meta property="og:title" content="PHP Reservation Platform">
+  <meta property="og:description" content="A simple reservation platform, where users create accounts then select a date and reserve. Made with LAMP stack">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-28T20:13:58+03:00">
+    <meta property="article:modified_time" content="2025-05-28T20:13:58+03:00">
+    <meta property="article:tag" content="Projects">
+    <meta property="article:tag" content="PHP">
+    <meta property="article:tag" content="Web">
 
 <title>Timo&#39;s blog | PHP Reservation Platform</title>
 
@@ -125,14 +130,12 @@
 <li>
 <p><strong>isUserValid() : bool</strong> function</p>
 <p>First, the database is called.</p>
-<pre tabindex="0"><code>require &quot;dbConnect.php&quot;;
+<pre tabindex="0"><code>require &#34;dbConnect.php&#34;;
 $db = getDB();
-</code></pre><pre tabindex="0"><code>
-query is then done to find the `$_POST[&quot;name&quot;]` in the database
- not found, returns true and puts the username value `$_SESSION['name'] = $username;`
-else returns false.
-
-</code></pre></li>
+</code></pre><p>A query is then done to find the <code>$_POST[&quot;name&quot;]</code> in the database
+If not found, returns true and puts the username value <code>$_SESSION['name'] = $username;</code>
+, else returns false.</p>
+</li>
 <li>
 <p><strong>isPasswdValid(): bool</strong></p>
 <p>Checks if the &ldquo;enter password&rdquo; and &ldquo;re-enter password&rdquo; got the same input</p>
@@ -190,9 +193,9 @@ then executes the following query:
   <div class="tags pb-4 pt-2">
     
     
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">Projects</a>
         <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/php/">PHP</a>
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">Web</a>
   </div>
 
       <div class="row">

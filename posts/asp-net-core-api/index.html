@@ -6,13 +6,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
-<meta property="og:title" content="ASP NET Core API" />
-<meta property="og:description" content="An ASP NET Core web API built to work with a PostgreSQL database" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2026-05-17T17:47:17+03:00" />
-<meta property="article:modified_time" content="2026-05-17T17:47:17+03:00" />
-
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/">
+  <meta property="og:site_name" content="Timo&#39;s blog">
+  <meta property="og:title" content="ASP NET Core API">
+  <meta property="og:description" content="An ASP NET Core web API built to work with a PostgreSQL database">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-05-17T17:47:17+03:00">
+    <meta property="article:modified_time" content="2026-05-17T17:47:17+03:00">
+    <meta property="article:tag" content="Projects">
+    <meta property="article:tag" content="CSharp">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="Postgresql">
+    <meta property="article:tag" content="ASP NET">
 
 <title>Timo&#39;s blog | ASP NET Core API</title>
 
@@ -121,202 +128,202 @@ Clients must include the token in the <code>Authorization</code> HTTP header usi
 <hr>
 <h2 id="endpoint-summary">Endpoint Summary</h2>
 <table>
-<thead>
-<tr>
-<th>HTTP Method</th>
-<th>Endpoint</th>
-<th>Authorization Role</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Authentication</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Auth/login</code></td>
-<td>Public</td>
-<td>Authenticates a user (Medic or Patient) and returns a JWT token.</td>
-</tr>
-<tr>
-<td><strong>Medic</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Medic/me</code></td>
-<td>Medic</td>
-<td>Retrieves the profile summary of the currently authenticated Medic.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Medic</code></td>
-<td>Admin (Medic ID=1)</td>
-<td>Creates a new Medic profile.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Medic/me/scan</code></td>
-<td>Medic</td>
-<td>Scans a patient&rsquo;s card to link the Patient to the Medic and returns a profile summary.</td>
-</tr>
-<tr>
-<td><strong>Patient</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/me</code></td>
-<td>Patient</td>
-<td>Retrieves the complete profile of the currently authenticated Patient.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Patient</code></td>
-<td>Admin (Medic ID=1)</td>
-<td>Creates a new Patient profile.</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/{id}/profile</code></td>
-<td>Medic</td>
-<td>Retrieves the profile summary of a specific patient.</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/{id}/appointment</code></td>
-<td>Medic</td>
-<td>Retrieves a list of appointments for a specific patient.</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/{id}/symptom</code></td>
-<td>Medic</td>
-<td>Retrieves a list of symptoms recorded by a specific patient.</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/{id}/affection</code></td>
-<td>Medic</td>
-<td>Retrieves a list of affections diagnosed for a specific patient.</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Patient/{id}/medication</code></td>
-<td>Medic</td>
-<td>Retrieves a list of medications prescribed to a specific patient.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Patient/me/symptom</code></td>
-<td>Patient</td>
-<td>Adds a new symptom to the currently authenticated patient&rsquo;s profile.</td>
-</tr>
-<tr>
-<td><strong>Appointment</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Appointment/{id}</code></td>
-<td>Medic, Patient</td>
-<td>Retrieves a specific appointment by its ID.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Appointment</code></td>
-<td>Medic, Patient</td>
-<td>Creates a new appointment.</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/Appointment/{id}</code></td>
-<td>Medic, Patient</td>
-<td>Deletes a specific appointment.</td>
-</tr>
-<tr>
-<td><strong>Affection</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Affection/{id}</code></td>
-<td>Medic</td>
-<td>Retrieves a specific affection record by its ID.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Affection</code></td>
-<td>Medic</td>
-<td>Creates a new affection record for a linked patient.</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/Affection/{id}</code></td>
-<td>Medic</td>
-<td>Deletes a specific affection record.</td>
-</tr>
-<tr>
-<td><strong>Medication</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/Medication/{id}</code></td>
-<td>Medic</td>
-<td>Retrieves a specific medication record by its ID.</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/Medication</code></td>
-<td>Medic</td>
-<td>Prescribes a new medication to a linked patient.</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td><code>/api/Medication/{id}</code></td>
-<td>Medic</td>
-<td>Updates an existing medication record.</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/Medication/{id}</code></td>
-<td>Medic</td>
-<td>Deletes a specific medication record.</td>
-</tr>
-<tr>
-<td><strong>Symptom</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>PUT</td>
-<td><code>/api/Symptom/{id}</code></td>
-<td>Patient</td>
-<td>Updates an existing symptom record (e.g., toggles active status).</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/Symptom/{id}</code></td>
-<td>Patient</td>
-<td>Deletes a specific symptom record.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>HTTP Method</th>
+          <th>Endpoint</th>
+          <th>Authorization Role</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Authentication</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Auth/login</code></td>
+          <td>Public</td>
+          <td>Authenticates a user (Medic or Patient) and returns a JWT token.</td>
+      </tr>
+      <tr>
+          <td><strong>Medic</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Medic/me</code></td>
+          <td>Medic</td>
+          <td>Retrieves the profile summary of the currently authenticated Medic.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Medic</code></td>
+          <td>Admin (Medic ID=1)</td>
+          <td>Creates a new Medic profile.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Medic/me/scan</code></td>
+          <td>Medic</td>
+          <td>Scans a patient&rsquo;s card to link the Patient to the Medic and returns a profile summary.</td>
+      </tr>
+      <tr>
+          <td><strong>Patient</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/me</code></td>
+          <td>Patient</td>
+          <td>Retrieves the complete profile of the currently authenticated Patient.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Patient</code></td>
+          <td>Admin (Medic ID=1)</td>
+          <td>Creates a new Patient profile.</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/{id}/profile</code></td>
+          <td>Medic</td>
+          <td>Retrieves the profile summary of a specific patient.</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/{id}/appointment</code></td>
+          <td>Medic</td>
+          <td>Retrieves a list of appointments for a specific patient.</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/{id}/symptom</code></td>
+          <td>Medic</td>
+          <td>Retrieves a list of symptoms recorded by a specific patient.</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/{id}/affection</code></td>
+          <td>Medic</td>
+          <td>Retrieves a list of affections diagnosed for a specific patient.</td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Patient/{id}/medication</code></td>
+          <td>Medic</td>
+          <td>Retrieves a list of medications prescribed to a specific patient.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Patient/me/symptom</code></td>
+          <td>Patient</td>
+          <td>Adds a new symptom to the currently authenticated patient&rsquo;s profile.</td>
+      </tr>
+      <tr>
+          <td><strong>Appointment</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Appointment/{id}</code></td>
+          <td>Medic, Patient</td>
+          <td>Retrieves a specific appointment by its ID.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Appointment</code></td>
+          <td>Medic, Patient</td>
+          <td>Creates a new appointment.</td>
+      </tr>
+      <tr>
+          <td>DELETE</td>
+          <td><code>/api/Appointment/{id}</code></td>
+          <td>Medic, Patient</td>
+          <td>Deletes a specific appointment.</td>
+      </tr>
+      <tr>
+          <td><strong>Affection</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Affection/{id}</code></td>
+          <td>Medic</td>
+          <td>Retrieves a specific affection record by its ID.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Affection</code></td>
+          <td>Medic</td>
+          <td>Creates a new affection record for a linked patient.</td>
+      </tr>
+      <tr>
+          <td>DELETE</td>
+          <td><code>/api/Affection/{id}</code></td>
+          <td>Medic</td>
+          <td>Deletes a specific affection record.</td>
+      </tr>
+      <tr>
+          <td><strong>Medication</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td><code>/api/Medication/{id}</code></td>
+          <td>Medic</td>
+          <td>Retrieves a specific medication record by its ID.</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td><code>/api/Medication</code></td>
+          <td>Medic</td>
+          <td>Prescribes a new medication to a linked patient.</td>
+      </tr>
+      <tr>
+          <td>PUT</td>
+          <td><code>/api/Medication/{id}</code></td>
+          <td>Medic</td>
+          <td>Updates an existing medication record.</td>
+      </tr>
+      <tr>
+          <td>DELETE</td>
+          <td><code>/api/Medication/{id}</code></td>
+          <td>Medic</td>
+          <td>Deletes a specific medication record.</td>
+      </tr>
+      <tr>
+          <td><strong>Symptom</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>PUT</td>
+          <td><code>/api/Symptom/{id}</code></td>
+          <td>Patient</td>
+          <td>Updates an existing symptom record (e.g., toggles active status).</td>
+      </tr>
+      <tr>
+          <td>DELETE</td>
+          <td><code>/api/Symptom/{id}</code></td>
+          <td>Patient</td>
+          <td>Deletes a specific symptom record.</td>
+      </tr>
+  </tbody>
 </table>
 <hr>
 <h2 id="standard-http-status-codes">Standard HTTP Status Codes</h2>
@@ -413,122 +420,116 @@ Clients must include the token in the <code>Authorization</code> HTTP header usi
 <p>To ensure predictable integration, below are standardized examples of request payloads and expected responses for critical endpoints.</p>
 <h3 id="1-authenticate-user-post-apiauthlogin">1. Authenticate User (<code>POST /api/Auth/login</code>)</h3>
 <p><strong>Request Body:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;medic@example.com&#34;</span>,
-  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;securepassword123&#34;</span>,
-  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>
-}
-
-</code></pre></div><p><strong>Success Response (200 OK):</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&#34;</span>,
-  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>,
-  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">2</span>
-}
-
-</code></pre></div><h3 id="2-create-patient-post-apipatient">2. Create Patient (<code>POST /api/Patient</code>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;medic@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;securepassword123&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Success Response (200 OK):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;Medic&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-create-patient-post-apipatient">2. Create Patient (<code>POST /api/Patient</code>)</h3>
 <p><strong>Headers:</strong> <code>Authorization: Bearer &lt;Admin_Token&gt;</code></p>
 <p><strong>Request Body:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
-  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
-  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
-  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
-  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;patientpassword&#34;</span>,
-  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
-  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
-  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
-}
-
-</code></pre></div><p><strong>Success Response (200 OK):</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;patientpassword&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Success Response (200 OK):</strong>
 <em>(Returns the created Patient entity, omitting the plain-text password)</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
-  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
-  <span style="color:#f92672">&#34;cnp&#34;</span>: {
-    <span style="color:#f92672">&#34;codNumericPersonal&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>
-  },
-  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
-  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
-  <span style="color:#f92672">&#34;email&#34;</span>: {
-    <span style="color:#f92672">&#34;emailAddress&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
-    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
-  },
-  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
-  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: {
-    <span style="color:#f92672">&#34;number&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
-    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
-  },
-  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
-}
-
-</code></pre></div><h3 id="3-link-patient-via-scan-post-apimedicmescan">3. Link Patient via Scan (<code>POST /api/Medic/me/scan</code>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dateOfBirth&#34;</span>: <span style="color:#e6db74">&#34;1990-05-15&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;cnp&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;codNumericPersonal&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;emailAddress&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;number&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;isValid&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;123 Main St, Bucharest&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-link-patient-via-scan-post-apimedicmescan">3. Link Patient via Scan (<code>POST /api/Medic/me/scan</code>)</h3>
 <p><strong>Headers:</strong> <code>Authorization: Bearer &lt;Medic_Token&gt;</code></p>
 <p><strong>Request Body:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
-  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
-  <span style="color:#f92672">&#34;passwordHashed&#34;</span>: <span style="color:#e6db74">&#34;$2a$11$e.ExampleHashedPasswordString...&#34;</span>
-}
-
-</code></pre></div><p><strong>Success Response (200 OK):</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
-  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
-  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
-  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
-  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
-  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>
-}
-
-</code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;uname&#34;</span>: <span style="color:#e6db74">&#34;P-John-1900-a1b2c3d4&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;passwordHashed&#34;</span>: <span style="color:#e6db74">&#34;$2a$11$e.ExampleHashedPasswordString...&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Success Response (200 OK):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;cnp&#34;</span>: <span style="color:#e6db74">&#34;1900515123456&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;johndoe@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;phoneNumber&#34;</span>: <span style="color:#e6db74">&#34;+40712345678&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
 <h2 id="domain-constraints--business-logic">Domain Constraints &amp; Business Logic</h2>
 <p>The API strictly enforces several domain rules at the service layer. Violating these rules will result in a <code>400 Bad Request</code> or <code>500 Internal Server Error</code> with a descriptive message.</p>
 <table>
-<thead>
-<tr>
-<th>Validation Domain</th>
-<th>Rule Enforced</th>
-<th>Exception Raised</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>CNP (Romanian ID)</strong></td>
-<td>Must be exactly 13 characters and pass the official checksum calculation algorithm. Must be unique in the system.</td>
-<td><code>InvalidCNPException</code>, <code>CNPAlreadyExistsException</code></td>
-</tr>
-<tr>
-<td><strong>Email Address</strong></td>
-<td>Must contain an <code>@</code> symbol and a valid domain format.</td>
-<td><code>InvalidEmailException</code></td>
-</tr>
-<tr>
-<td><strong>Phone Number</strong></td>
-<td>Verified against the Google <code>libphonenumber-csharp</code> library. Assumes Romanian (<code>RO</code>) regional formatting by default.</td>
-<td><code>InvalidPhoneNumberException</code></td>
-</tr>
-<tr>
-<td><strong>Dates (Birth/Past)</strong></td>
-<td>Date of Birth, Affection Diagnose Dates, and Symptom Start Dates cannot be set in the future.</td>
-<td><code>FutureDateException</code></td>
-</tr>
-<tr>
-<td><strong>Dates (Appointments)</strong></td>
-<td>Appointment dates must be in the future. Issue dates must be past or present.</td>
-<td>Standard <code>BadRequest</code></td>
-</tr>
-<tr>
-<td><strong>Scheduling Conflicts</strong></td>
-<td>Appointments cannot be scheduled if either the Medic or the Patient has another appointment within a +/- 15-minute window.</td>
-<td>Standard <code>BadRequest</code></td>
-</tr>
-<tr>
-<td><strong>Username Generation</strong></td>
-<td>System-generated upon creation. Format: <code>[Role_Prefix]-[FirstName]-[Identifier]-[UUID_Hash]</code>. Must be unique.</td>
-<td><code>UnameAlreadyExistsException</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Validation Domain</th>
+          <th>Rule Enforced</th>
+          <th>Exception Raised</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>CNP (Romanian ID)</strong></td>
+          <td>Must be exactly 13 characters and pass the official checksum calculation algorithm. Must be unique in the system.</td>
+          <td><code>InvalidCNPException</code>, <code>CNPAlreadyExistsException</code></td>
+      </tr>
+      <tr>
+          <td><strong>Email Address</strong></td>
+          <td>Must contain an <code>@</code> symbol and a valid domain format.</td>
+          <td><code>InvalidEmailException</code></td>
+      </tr>
+      <tr>
+          <td><strong>Phone Number</strong></td>
+          <td>Verified against the Google <code>libphonenumber-csharp</code> library. Assumes Romanian (<code>RO</code>) regional formatting by default.</td>
+          <td><code>InvalidPhoneNumberException</code></td>
+      </tr>
+      <tr>
+          <td><strong>Dates (Birth/Past)</strong></td>
+          <td>Date of Birth, Affection Diagnose Dates, and Symptom Start Dates cannot be set in the future.</td>
+          <td><code>FutureDateException</code></td>
+      </tr>
+      <tr>
+          <td><strong>Dates (Appointments)</strong></td>
+          <td>Appointment dates must be in the future. Issue dates must be past or present.</td>
+          <td>Standard <code>BadRequest</code></td>
+      </tr>
+      <tr>
+          <td><strong>Scheduling Conflicts</strong></td>
+          <td>Appointments cannot be scheduled if either the Medic or the Patient has another appointment within a +/- 15-minute window.</td>
+          <td>Standard <code>BadRequest</code></td>
+      </tr>
+      <tr>
+          <td><strong>Username Generation</strong></td>
+          <td>System-generated upon creation. Format: <code>[Role_Prefix]-[FirstName]-[Identifier]-[UUID_Hash]</code>. Must be unique.</td>
+          <td><code>UnameAlreadyExistsException</code></td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="authorization-constraints">Authorization Constraints</h2>
 <p>The API utilizes strict cross-referencing to ensure data privacy:</p>
@@ -566,7 +567,7 @@ Clients must include the token in the <code>Authorization</code> HTTP header usi
 <hr>
 <h2 id="the-code">The Code</h2>
 <ul>
-<li>The code can be found on <a href="https://github.com/ciupei-timotei-30323/MediTap-Backend">my github</a></li>
+<li>The code can be found on <a href="https://github.com/ciupei-timotei-30323/ClubCheckAPI">my github</a></li>
 </ul>
 <hr>
 <p><em>T.</em></p>
@@ -576,10 +577,10 @@ Clients must include the token in the <code>Authorization</code> HTTP header usi
   <div class="tags pb-4 pt-2">
     
     
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">Projects</a>
         <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/csharp/">CSharp</a>
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">web</a>
-        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/postgresql/">postgresql</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">Web</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/postgresql/">Postgresql</a>
         <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/asp-net/">ASP NET</a>
   </div>
 
@@ -593,6 +594,11 @@ Clients must include the token in the <code>Authorization</code> HTTP header usi
         
     </div>
     <div class="col-md text-md-end">
+        
+        <a href="https://ciupei-timotei-30323.github.io/posts/clubcheck-web-app/">
+            <span>next: </span>
+            <span>ClubCheck: Event Discovery That Fills Itself</span>
+        </a>
         
     </div>
 </div>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="https://ciupei-timotei-30323.github.io/favicon.ico" />
+<meta property="og:url" content="https://ciupei-timotei-30323.github.io/posts/clubcheck-web-app/">
+  <meta property="og:site_name" content="Timo&#39;s blog">
+  <meta property="og:title" content="ClubCheck: Event Discovery That Fills Itself">
+  <meta property="og:description" content="A three-service event discovery platform where a scraper uses a tiered LLM pipeline to find, classify, and publish concerts and club nights automatically. ASP.NET Core, Node.js, Next.js, PostgreSQL, Azure Container Apps.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-11-19T18:55:12+02:00">
+    <meta property="article:modified_time" content="2026-11-19T18:55:12+02:00">
+    <meta property="article:tag" content="Projects">
+    <meta property="article:tag" content="CSharp">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="Postgresql">
+    <meta property="article:tag" content="ASP NET">
+    <meta property="article:tag" content="Azure Container App">
+
+<title>Timo&#39;s blog | ClubCheck: Event Discovery That Fills Itself</title>
+
+      <link rel="stylesheet" href="/css/main.min.698bc3e32b756e1f5322e47c0a024ef4fef02de7ddbc5af443455430b5482f03.css" integrity="sha256-aYvD4yt1bh9TIuR8CgJO9P7wLefdvFr0Q0VUMLVILwM=" crossorigin="anonymous">
+  
+        <link rel="stylesheet" href="/css/palette/dracula.min.3cdf1257046afa656bd324735b1c4dee1ea6983c6f9294f591601831c14d6275.css" integrity="sha256-PN8SVwRq&#43;mVr0yRzWxxN7h6mmDxvkpT1kWAYMcFNYnU=" crossorigin="anonymous">
+
+      <script src="/js/main.86bb3d8e6f46df0fc97c2731e6b99175a13b87a4086acf578ff9b6992fcf32c1.js" integrity="sha256-hrs9jm9G3w/JfCcx5rmRdaE7h6QIas9Xj/m2mS/PMsE=" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+  
+<body
+    class="dark"
+>
+  
+  <main>
+    
+  <div class="container pt-5">
+    <div class="row mt-5 pt-5">
+      
+  <nav aria-label="breadcrumb" class="small">
+    <ol class="breadcrumb fw-bold">
+    <li class="breadcrumb-item">
+      <a href="/"
+        
+      >home</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/about"
+        
+      >about</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/posts"
+        class="text-decoration-underline link-offset-3"
+        
+      >posts</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://github.com/ciupei-timotei-30323/"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >github</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://ro.linkedin.com/in/timotei-ciupei-16aa55342"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >linkedin</a>
+      
+    </li>
+    <li class="breadcrumb-item">
+      <a href="https://www.dropbox.com/scl/fi/v8ojc8nq0mbjcv7flugks/Timotei_Ciupei_cv-2.pdf?rlkey=nv4nvaac2jd2ki0s13qrzbw4p&dl=0"
+        
+          target="_blank" rel="noopener noreferrer"
+        
+      >resume</a>
+      
+    </li>
+    </ol>
+  </nav>
+
+    </div>
+    
+    <div class="post">
+      <header class="mb-4">
+        <h1 class="text-uppercase">ClubCheck: Event Discovery That Fills Itself</h1>
+        
+        
+        <div aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item small">
+              <time datetime="2026-11-19T18:55:12&#43;02:00">November 19, 2026</time>
+            </li>
+            <li class="breadcrumb-item small">
+              3 minutes
+            </li>
+          </ol>
+        </div>
+      </header>
+      <article>
+        <h1 id="clubcheck">ClubCheck</h1>
+<p>Finding out what&rsquo;s happening in your city this weekend usually means checking a dozen venue websites, each with its own layout. <strong>ClubCheck</strong> fixes that: it discovers concerts, festivals, and club nights across venue sites, extracts them into a clean catalogue, and serves them through a fast, filterable (Romanian-language) web app.</p>
+<p>The interesting part isn&rsquo;t the listing page. It&rsquo;s that <strong>the catalogue populates itself.</strong></p>
+<h2 id="screenshots">Screenshots</h2>
+<p><img src="/images/calendar.png" alt="Screenshot of the application"></p>
+<p><img src="/images/searchBar.png" alt="Screenshot of the application"></p>
+<h2 id="how-it-fits-together">How It Fits Together</h2>
+<p>ClubCheck is a monorepo of three independently containerized services. The public site and databases run on <strong>Azure Container Apps</strong>, while the heavy crawling and first-pass LLM filtering run on a <strong>self-hosted Linux home server</strong> to keep recurring token costs near zero.</p>
+<iframe src="https://mermaid.live/embed?theme=neo-dark&look=neo&mode=light#pako:eNp1VNtu4zYQ_ZUBHwqnK62APgaLAIqTTYLaibcyiqJiH2hqJLORSO2QcpJd7b8XpC523PaJ5MyZC-cc8juTpkB2ycravMi9IAer37gGuCbzYpFyzsYdZ395-1OLJJzxjmkLCWRyj0VXjyiPs92uItHuIV2mOWfpt44QlkY7oTQSpG1rYbFWkoxFOiiJ9mKsAPCZjHaoi5yzR3x1H_-2s-nTjpKrDOmABEvTtEajdnaOTDcPvli2-fh4u4WlIfSmENR2u1pJIBSFhQ_QkjoIh_BCyuExQSZJtOHaj6ZAX3m0hByfhXWqfIMPcN3V9frLGIa6OLv05i7nbGOsqwizLytY3AgndsJi3CLF2XDj44XTVt3s8gVn6eYBbq5DLTz4m0VwQN2hjUCQU9YbKtTkO7543_KQYDxMSazpSProVlR--dphd4z9d9_3psFhujlnGdZlfG-swyI4YPAcaVKEksRLnXM272Fx-OUi1G5ECwnY0BAkgK-OhHRz9FNdi0Z4GYUNLFZGihpWq_UY3lkl4zAFkLWwVpVKCqeM_t-p3746JC18P8vadAX85OWqwQ_f6-CEZk96ztnvfriQQEumMQ4J7Ds13JH5mnPml9DT-z6gFHW9E_L5iMdGaeUjjKlqHM8DE4466TrCYprE8SY-0EhTKF0Nz0rHa3RoQmA1uWbw2k_mmoTS33LOTk4BP-gEUJOS-wa1Ox_X-J4hjq_6--12k_Xz6_LuaR_8d7dbSG6DEpPhAf3c-0l6oNfqpzi-GtQ75J6_hDl44D-C11i0Kn7Gt34SrMdPcg15ZiGfenyiUyX1R9mFbmfd-RR9PWkIlC6RUEvsR6W9R3twiU7u0Q5vA0oyTT8I47z-xPOZDvugj3PwfxLdj1I4B0vl3qA25rlr-6MIzlEjpRPuhPFz5OYp20ISVG2T8YuLIEmHv2O2BKEkd-EjOYFNRA-GAPojTjcP8a-etkA7i1hFqmCXjjqMWIPUCH9k3zlze2yQs0vONJq4EPTMWcSZb3uycvaDRawV-k9jmikJma7as8tS1BYj1rWFcHijREVihPz4B13_SGM" width="90%" height="480" style="border:0" loading="lazy" title="ClubCheck architecture diagram" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+<table>
+  <thead>
+      <tr>
+          <th>Service</th>
+          <th>What it does</th>
+          <th>Stack</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>DataScraper</strong></td>
+          <td>Discovers, classifies, and extracts events from venue sites</td>
+          <td>Node.js, Fastify, BullMQ, Firecrawl, Ollama, Groq, Gemini</td>
+      </tr>
+      <tr>
+          <td><strong>ClubCheckAPI</strong></td>
+          <td>Stores the catalogue; public read API plus a key-protected write API</td>
+          <td>.NET 10, ASP.NET Core, EF Core, PostgreSQL</td>
+      </tr>
+      <tr>
+          <td><strong>Frontend</strong></td>
+          <td>Server-rendered browsing, filters, and event pages</td>
+          <td>Next.js 16, React 19, TypeScript, Tailwind 4</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="the-scraper-cheap-models-first-smart-models-last">The Scraper: Cheap Models First, Smart Models Last</h2>
+<p>Most pages on a venue site aren&rsquo;t music events: they&rsquo;re theatre, stand-up, archives, or index pages. Sending every page to a frontier LLM would be slow and expensive, so the scraper filters in tiers:</p>
+<ol>
+<li><strong>Discover</strong>: pull links from a site&rsquo;s sitemap (or the page itself), keep only same-host URLs, and skip anything already seen.</li>
+<li><strong>Classify cheaply</strong>: a self-hosted Firecrawl instance, backed by a small local Ollama model, rejects non-music and multi-event index pages at zero API cost. If that fails, <strong>Groq</strong> takes over as a fallback classifier.</li>
+<li><strong>Extract</strong>: only confirmed music pages reach <strong>Gemini</strong>, which returns structured JSON (events, venues, artists, genres, prices) validated against a strict Zod schema. The prompt treats page content as untrusted input.</li>
+<li><strong>Verify</strong>: venue cities are checked against a geocoding API, and artists are enriched through MusicBrainz.</li>
+<li><strong>Ingest</strong>: venues, artists, and genres are created first, then events, via the API&rsquo;s private endpoints.</li>
+</ol>
+<p>Jobs run through a <strong>PostgreSQL-backed BullMQ queue</strong> with retries and exponential backoff. Pages are marked as processed only <em>after</em> a successful downstream write, so a failure never silently loses an event. Rate limiters keep the pipeline polite to every external API it touches.</p>
+<h2 id="the-api-boring-on-purpose">The API: Boring on Purpose</h2>
+<p>The ASP.NET Core API is the single source of truth. Public endpoints power the frontend, with paging, filtering by city, venue, genre, date range, and price, plus a &ldquo;most active&rdquo; ranking. Write endpoints sit behind an API key and are <strong>idempotent</strong>: re-ingesting the same artist, venue, or event returns the existing record instead of creating duplicates. Artist creation uses PostgreSQL advisory locks to stay safe under concurrent scraper jobs.</p>
+<p>It&rsquo;s covered by <strong>xUnit integration tests running against a real PostgreSQL container</strong> (Testcontainers), so migrations and queries are tested exactly as they run in production.</p>
+<h2 id="the-frontend-server-first">The Frontend: Server-First</h2>
+<p>The Next.js app uses React Server Components and the App Router. Every filter lives in the URL, so any search is shareable and the back button just works. Event pages ship with canonical and Open Graph metadata plus schema.org <code>Event</code> JSON-LD for search engines. Only interactive bits (search, comboboxes, date picker) run client-side, and all API calls happen on the server with timeouts, caching, and retryable error states.</p>
+<h2 id="shipping-it">Shipping It</h2>
+<p>Three path-filtered <strong>GitHub Actions</strong> workflows test, build, and publish each service&rsquo;s image to GHCR, then deploy to <strong>Azure Container Apps</strong> using passwordless OIDC login and digest-pinned images, so what was tested is exactly what runs. Pull requests run tests but never deploy.</p>
+<h2 id="what-id-build-next">What I&rsquo;d Build Next</h2>
+<ul>
+<li>A <strong>user service</strong> for accounts, favourites, and email alerts for tracked artists and venues</li>
+<li><strong>Smarter scraping</strong>: diffing to skip unchanged pages and better extractors for dynamic promoter sites</li>
+<li>A <strong>Redis caching layer</strong> and tuned scaling rules for the public catalogue</li>
+</ul>
+<h2 id="the-code">The Code</h2>
+<p>Full source, setup instructions, and per-service docs are on <a href="https://github.com/ciupei-timotei-30323/MediTap-Backend">my GitHub</a>.</p>
+<hr>
+<p><em>T.</em></p>
+
+      </article>
+      
+  <div class="tags pb-4 pt-2">
+    
+    
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/projects/">Projects</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/csharp/">CSharp</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/web/">Web</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/postgresql/">Postgresql</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/asp-net/">ASP NET</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/azure-container-app/">Azure Container App</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/nodejs/">NodeJS</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/nextjs/">Nextjs</a>
+        <a class="badge rounded-pill text-uppercase text-bg-secondary" href="/tags/docker/">Docker</a>
+  </div>
+
+      <div class="row">
+    <div class="col-md">
+        
+        <a href="https://ciupei-timotei-30323.github.io/posts/asp-net-core-api/">
+            <span>previous: </span>
+            <span>ASP NET Core API</span>
+        </a>
+        
+    </div>
+    <div class="col-md text-md-end">
+        
+    </div>
+</div>
+    </div>
+  </div>
+  <footer>
+    <div class="container mt-4 pb-1">
+    <p class="small opacity-75">
+        
+        
+    </p>
+</div>
+
+  </footer>
+
+  </main>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
